@@ -1,0 +1,13 @@
+
+<a style="display: inline-block; width: 130px; height: 180px;
+            position: relative; border-radius: 4px; overflow: hidden;
+            text-decoration: none; color: rgba(0, 0, 0, 0.348);"
+            [routerLink]="['/book', book.name]">
+                
+                <img src="/assets/bookCover1.png" alt="" style="width: 100%; height: 100%; display: block;" />
+                
+                <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 20%; background-color: rgba(10, 10, 10, 0.6); color: white; display: flex; align-items: center; justify-content: center; font-family: sans-serif; font-size: 0.85em; font-weight: bold;">
+                    {{ book.name }}
+                </div>
+
+            </a>

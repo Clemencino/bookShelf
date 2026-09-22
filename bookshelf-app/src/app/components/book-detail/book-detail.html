@@ -1,0 +1,12 @@
+@if (book){
+    <div>
+        <h2>{{ book.name }}</h2>
+        <p>{{ book.description }}</p>
+        
+        <button (click)="deleteThisBook()">Supprimer le livre</button>
+        <button routerLink="/">Retour</button>
+    </div>
+}@else {
+    <p>Livre introuvable.</p>
+    <button routerLink="/">Retour</button>
+}
