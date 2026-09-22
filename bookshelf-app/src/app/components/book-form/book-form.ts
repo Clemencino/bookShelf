@@ -21,6 +21,7 @@ export class BookFormComponent {
   newBookName = '';
   newBookDescription = '';
   newUrlImage = '';
+
   annuler() {
     this.router.navigate(['/']);
   }

@@ -1,10 +1,22 @@
-<label>Nom :</label>
-<input [(ngModel)]="newBookName"/>
+<div class="form">
+    <div class="form-field-name">
+        Name:
+        <input [(ngModel)]="newBookName"/>
+    </div>
 
+    <div class="form-field-url">
+        Image URL:
+        <input [(ngModel)]="newUrlImage"/>
+    </div>
+    <div class="form-field-description">
+        Description:
+        <textarea [(ngModel)]="newBookDescription"></textarea>
+    </div>
 
-<label>Description :</label>
-<input [(ngModel)]="newBookDescription"/>
+    
 
-
-<button (click)="annuler()">Annuler</button>
-<button (click)="submit()" >Confirmer</button>
+    <div class="form-buttons">
+        <button (click)="annuler()">Cancel</button>
+        <button (click)="submit()">Add</button>
+    </div>
+</div>
