@@ -1,13 +1,20 @@
-<div>
-    <h1 style="text-align: center;">Library</h1>
+<h1 style="text-align: center;">Library</h1>
+<div class="placeholder">
 
-    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-        @for (item of bookshelf; track item.name) {
-            <app-book [book] =item/>
-        }
+    <div class="book-infos">
+        {{ bookshelf.length }} books collected
     </div>
-</div>
 
-<div class="addButton">
-    <button class="add" routerLink="/addBook">+ Add Book</button>
+    <div>
+        <div class = "books">
+            @for (item of bookshelf; track item.name) {
+                <app-book [book] =item/>
+            }
+        </div>
+    </div>
+
+    <div class="addButton">
+        <button class="add" routerLink="/addBook">+ Add Book</button>
+    </div>
+
 </div>

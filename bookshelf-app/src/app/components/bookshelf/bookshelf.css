@@ -18,3 +18,23 @@
     cursor: pointer;
     background-color: #d36949;
 }
+
+.placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+.book-infos{
+    width: 100%;
+    margin-left: 32%;
+    padding: 15px;;
+}
+
+.books {
+    display: grid;
+    grid-template-columns:repeat(6, 200px);
+    gap: 20px;
+    
+}
