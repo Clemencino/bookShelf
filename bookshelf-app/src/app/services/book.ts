@@ -21,11 +21,10 @@ export class BookService {
         this.bookshelf.push(newBook);
 
     }
-
-    deleteBook(index: number) {
-        this.bookshelf.splice(index, 1);
-  
-    }
     */
+    createBook() {
+        this.http.post('http://localhost:3000/create_book');  
+    }
+    
 }
 }

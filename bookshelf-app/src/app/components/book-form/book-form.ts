@@ -30,6 +30,7 @@ export class BookFormComponent {
     if (this.newBookName.trim() === ''){
       return;
     }
+    
     /*
     this.bookService.addBook({
       name: this.newBookName,
