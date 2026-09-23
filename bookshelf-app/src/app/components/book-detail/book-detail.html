@@ -1,12 +1,19 @@
 @if (book){
-    <div>
-        <h2>{{ book.name }}</h2>
-        <p>{{ book.description }}</p>
+    <div class = "container">
+        <div class = "book-infos">
+            <div class ="title">
+                Book: {{ book.name }}
+            </div>
+            {{ book.description }}
+        </div>
+
+        <div class = "buttons">
+            <button class = "cancel" routerLink="/">Cancel</button>
+            <button class="delete" (click)="deleteThisBook()">Delete book</button>
+        </div>
         
-        <button (click)="deleteThisBook()">Supprimer le livre</button>
-        <button routerLink="/">Retour</button>
     </div>
 }@else {
-    <p>Livre introuvable.</p>
+    <p>No book</p>
     <button routerLink="/">Retour</button>
 }
