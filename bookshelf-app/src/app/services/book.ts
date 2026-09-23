@@ -14,7 +14,7 @@ export class BookService {
 
     constructor(private http: HttpClient) {}
     getBooks(){
-        return this.http.get<Book[]>('http://localhost:3000/books');
+        return this.http.get<Book[]>('http://localhost:3000/get_books');
     /*
     addBook(newBook: Book) {
         this.http.get('/books')

@@ -19,7 +19,9 @@ export class BookshelfComponent {
 
   ngOnInit() {
     this.bookService.getBooks().subscribe((books) =>{
+      console.log(books);
       this.bookshelf = books;
+      console.log(this.bookshelf);
     });
   }
   /*
