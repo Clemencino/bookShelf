@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http'
 
 export interface Book {
     name: string;
@@ -10,35 +11,21 @@ export interface Book {
     providedIn: 'root'
 })
 export class BookService {
-    loadBooks(): Book[] {
-        const savedData = localStorage.getItem('bookshelf');
-        if (savedData) {
-            return JSON.parse(savedData);
-        }
-        return [
-            { name: "Book1", description: "BlaBlaBla", urlImage:"assets/bookCover1.png" }, 
-            { name: "Book2", description: "zzzZZZZ", urlImage:"assets/bookCover1.png" }
-        ];
-    }
 
-    bookshelf : Book[] = this.loadBooks();
-
-    getBooks() {
-        return this.bookshelf;
-    }
-
+    constructor(private http: HttpClient) {}
+    getBooks(){
+        return this.http.get<Book[]>('http://localhost:3000/books');
+    /*
     addBook(newBook: Book) {
+        this.http.get('/books')
         this.bookshelf.push(newBook);
-        this.saveToStorage();
+
     }
 
     deleteBook(index: number) {
         this.bookshelf.splice(index, 1);
-        this.saveToStorage();
+  
     }
-
-    private saveToStorage() {
-        localStorage.setItem('bookshelf', JSON.stringify(this.bookshelf));
-    }
+    */
 }
-
+}

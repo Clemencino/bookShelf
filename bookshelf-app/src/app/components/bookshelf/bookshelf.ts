@@ -1,6 +1,7 @@
 import { Component, inject} from '@angular/core';
 import { RouterLink } from '@angular/router'
 import { BookService } from '../../services/book';
+import { Book as IBook } from '../../services/book';
 import { Book }from './components/book/book';
 
 @Component({
@@ -12,11 +13,18 @@ import { Book }from './components/book/book';
 })
 
 export class BookshelfComponent {
-  bookService = inject(BookService);
+  bookshelf: IBook[] = [];
 
-  bookshelf = this.bookService.getBooks();
-  
+  constructor(private bookService: BookService) {}
+
+  ngOnInit() {
+    this.bookService.getBooks().subscribe((books) =>{
+      this.bookshelf = books;
+    });
+  }
+  /*
   deleteBook(idBook : number){
     this.bookService.deleteBook(idBook);
   }
+  */
 }

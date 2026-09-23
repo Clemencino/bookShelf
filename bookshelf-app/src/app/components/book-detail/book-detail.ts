@@ -5,6 +5,7 @@ import { BookService } from '../../services/book';
 interface Book {
   name: string;
   description: string;
+  urlImage: string;
 }
 
 @Component({
@@ -21,21 +22,26 @@ export class BookDetail {
 
   book?: Book;
   bookIndex = 0;
+  allBooks: Book[] = [];
 
   ngOnInit() {
     const nameFromUrl = this.route.snapshot.paramMap.get('bookName');
-    const allBooks = this.bookService.getBooks();
+    this.bookService.getBooks().subscribe((books) =>{
+        this.allBooks = books;
+    });
 
-    for (let i = 0; i < allBooks.length; i++) {
-      if (allBooks[i].name === nameFromUrl) {
-        this.book = allBooks[i];
+    for (let i = 0; i < this.allBooks.length; i++) {
+      if (this.allBooks[i].name === nameFromUrl) {
+        this.book = this.allBooks[i];
         this.bookIndex = i;
       }
     }
   }
 
+  /*
   deleteThisBook() {
     this.bookService.deleteBook(this.bookIndex);
     this.router.navigate(['/']);
   }
+    */
 }

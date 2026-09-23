@@ -5,6 +5,7 @@ import { BookService } from '../../services/book'
 interface Book {
   name: string;
   description: string;
+  urlImage: string,
 }
 
 @Component({
@@ -29,11 +30,13 @@ export class BookFormComponent {
     if (this.newBookName.trim() === ''){
       return;
     }
+    /*
     this.bookService.addBook({
       name: this.newBookName,
       description: this.newBookDescription,
       urlImage: this.newUrlImage
     });
+    */
     console.log('Livre créé :', this.newBookName);
     this.router.navigate(['/']);
   }
