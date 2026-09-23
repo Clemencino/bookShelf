@@ -26,10 +26,11 @@
     flex-direction: column;
 
 }
-.book-infos{
-    width: 100%;
-    margin-left: 32%;
-    padding: 15px;;
+
+.book-infos {
+    width: 420px;
+    padding: 15px;
+    box-sizing: border-box;
 }
 
 .books {
