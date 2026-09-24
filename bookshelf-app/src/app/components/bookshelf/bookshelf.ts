@@ -1,7 +1,7 @@
 import { Component, inject} from '@angular/core';
 import { RouterLink } from '@angular/router'
 import { BookService } from '../../services/book';
-import { Book as IBook } from '../../services/book';
+import { Book as IBook } from '../../models/book';
 import { Book }from './components/book/book';
 import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core'

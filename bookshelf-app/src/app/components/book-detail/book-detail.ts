@@ -2,13 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BookService } from '../../services/book';
 import { ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-
-interface Book {
-  id: number;
-  name: string;
-  description: string;
-  urlImage: string;
-}
+import { Book } from '../../models/book'
 
 @Component({
   imports: [ RouterLink ],
