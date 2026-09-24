@@ -4,8 +4,8 @@ import type { Book } from '../data.ts';
 export function getAllBooks() {
     return books;
 }
-export function getBook(id: number): Book{
-    for (book of books) {
+export function getBook(id: number): Book |null{
+    for (const book of books) {
         if (book.id === id) {
             return book;
         }
@@ -23,6 +23,21 @@ export function deleteBook(id: number): boolean {
     return false;
 }
 
-export function addBook(toadd: string) {
-    books.push(toadd);
+export function addBook(toadd: Omit<Book,'id'>): Book{
+    let newId = 1;
+    for (const book of books) {
+        if (book.id >= newId) {
+            newId =book.id+ 1;
+        }
+    }
+    const book: Book = {
+        id: newId,
+        name: toadd.name,
+        description: toadd.description,
+        urlImage: toadd.urlImage
+    };
+
+    books.push(book);
+    return book;
 }
+

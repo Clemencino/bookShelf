@@ -2,6 +2,7 @@ import { Component, input, output, inject} from '@angular/core';
 import { FormsModule} from '@angular/forms'
 import { Router, RouterLink} from '@angular/router'
 import { BookService } from '../../services/book'
+
 interface Book {
   id: number;
   name: string;
@@ -31,15 +32,15 @@ export class BookFormComponent {
     if (this.newBookName.trim() === ''){
       return;
     }
-    
-    /*
-    this.bookService.addBook({
+    const newBook = {
       name: this.newBookName,
       description: this.newBookDescription,
       urlImage: this.newUrlImage
+    };
+    this.bookService.createBook(newBook).subscribe((book) => {
+      console.log('book created');
+      this.router.navigate(['/']);
     });
-    */
-    console.log('Livre créé :', this.newBookName);
-    this.router.navigate(['/']);
+
   }
 }

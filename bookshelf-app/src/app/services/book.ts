@@ -16,16 +16,17 @@ export class BookService {
     constructor(private http: HttpClient) {}
     getBooks(){
         return this.http.get<Book[]>('http://localhost:3000/get_books');
+    }
     /*
     addBook(newBook: Book) {
         this.http.get('/books')
         this.bookshelf.push(newBook);
 
     }
-    
-    createBook() {
-        this.http.post('http://localhost:3000/create_book');  
+        */
+    createBook(book: Omit<Book,'id'>){
+      return this.http.post<Book>('http://localhost:3000/create_book', book);
     }
-    */
-}
+    
+
 }
