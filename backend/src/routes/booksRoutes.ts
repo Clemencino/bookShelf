@@ -10,3 +10,5 @@ router.get('/get_book/:id', bookController.getBook);
 router.delete('/delete_book/:id', bookController.deleteBook);
 
 router.post('/create_book', bookController.addBook);
+
+router.put('/update_book/:id', bookController.updateBook);

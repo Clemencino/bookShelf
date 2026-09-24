@@ -9,6 +9,7 @@
 
         <div class = "buttons">
             <button class = "cancel" routerLink="/">Cancel</button>
+            <button class="edit" [routerLink]="['/editBook', book.id]">Edit book</button>
             <button class="delete" (click)="deleteBook()">Delete book</button>
         </div>
         

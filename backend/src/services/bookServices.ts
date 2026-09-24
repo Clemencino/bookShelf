@@ -41,3 +41,15 @@ export function addBook(toadd: Omit<Book,'id'>): Book{
     return book;
 }
 
+export function updateBook(id: number,newName: string,newDescription: string, newUrlImage: string):Book | null {
+
+    const book = getBook(id);
+    if (book === null){
+        return null;
+    }
+    book.name = newName;
+    book.description = newDescription;
+    book.urlImage = newUrlImage;
+
+    return book;
+}

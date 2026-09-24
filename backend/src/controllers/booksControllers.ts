@@ -28,4 +28,12 @@ export function addBook(req: Request, res: Response) {
     return res.status(201).json(newBook);
 }
 
+export function updateBook(req: Request, res: Response) {
+    const id = Number(req.params.id);
+    const newBook = bookService.updateBook(id,req.body.name,req.body.description,req.body.urlImage);
 
+    if (newBook === null) {
+        return res.status(404).json({ message: "Book not found" });
+    }
+    return res.json(newBook);
+}

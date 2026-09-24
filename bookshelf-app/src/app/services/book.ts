@@ -30,4 +30,7 @@ export class BookService {
         return this.http.delete(`http://localhost:3000/delete_book/${id}`);
     }
 
+    updateBook(id: number, book: Omit<Book, 'id'>){
+        return this.http.put(`http://localhost:3000/update_book/${id}`, book);
+    }
 }

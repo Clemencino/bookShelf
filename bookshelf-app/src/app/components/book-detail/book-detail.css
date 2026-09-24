@@ -9,7 +9,7 @@
     width: 100%;
 }
 
-.cancel{
+.cancel, .edit{
     font-size: 16px;
     background-color: #b6583c;
     color: white;
@@ -46,7 +46,7 @@
     margin-bottom: 20px;
 }
 
-.cancel:hover, .delete:hover {
+.cancel:hover, .delete:hover, .edit:hover{
     cursor: pointer;
     background-color: #d36949;
 }
