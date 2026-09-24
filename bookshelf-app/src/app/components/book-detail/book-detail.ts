@@ -38,10 +38,13 @@ export class BookDetail {
     }
   }
 
-  /*
-  deleteThisBook() {
-    this.bookService.deleteBook(this.bookIndex);
-    this.router.navigate(['/']);
+  deleteBook(){
+    if (this.book) {
+      this.bookService.deleteBook(this.book.id).subscribe(() => {
+      this.router.navigate(['/']);
+    });
+    }
   }
-    */
+
+
 }

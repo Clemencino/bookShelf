@@ -23,8 +23,11 @@ export class BookService {
     }
     
     createBook(book: Omit<Book,'id'>){
-      return this.http.post<Book>('http://localhost:3000/create_book', book);
+        return this.http.post<Book>('http://localhost:3000/create_book', book);
     }
     
+    deleteBook(id: number){
+        return this.http.delete(`http://localhost:3000/delete_book/${id}`);
+    }
 
 }
