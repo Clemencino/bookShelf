@@ -25,8 +25,7 @@ export function deleteBook(req: Request, res: Response) {
 
 export function addBook(req: Request, res: Response) {
     bookService.addBook(req.body);
-    return res.status(201).send();
+    return res.status(201).json(newBook);
 }
-
 
 

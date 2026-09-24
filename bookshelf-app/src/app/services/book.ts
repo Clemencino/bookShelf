@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 
 export interface Book {
+    id: number;
     name: string;
     description: string;
     urlImage: string;
@@ -21,10 +22,10 @@ export class BookService {
         this.bookshelf.push(newBook);
 
     }
-    */
+    
     createBook() {
         this.http.post('http://localhost:3000/create_book');  
     }
-    
+    */
 }
 }

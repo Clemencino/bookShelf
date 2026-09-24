@@ -3,6 +3,7 @@ import { FormsModule} from '@angular/forms'
 import { Router, RouterLink} from '@angular/router'
 import { BookService } from '../../services/book'
 interface Book {
+  id: number;
   name: string;
   description: string;
   urlImage: string,
