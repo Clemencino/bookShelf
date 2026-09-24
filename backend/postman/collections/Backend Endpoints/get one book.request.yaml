@@ -1,0 +1,4 @@
+$kind: http-request
+url: http://localhost:3000/get_book/2
+method: GET
+order: 4501679537964273

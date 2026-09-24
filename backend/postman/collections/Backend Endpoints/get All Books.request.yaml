@@ -1,4 +1,4 @@
 $kind: http-request
-url: ""
+url: http://localhost:3000/get_books
 method: GET
 order: 4234949380763110

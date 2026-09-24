@@ -1,0 +1,12 @@
+$kind: http-request
+url: http://localhost:3000/create_book
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "name": "TEST POSTMAN",
+      "description": "Test testsetestestestest",
+      "urlImage": "no"
+    }
+order: 4423360942877958

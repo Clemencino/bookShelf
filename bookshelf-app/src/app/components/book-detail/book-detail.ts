@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BookService } from '../../services/book';
+import { ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 
 interface Book {
   id: number;
@@ -15,27 +16,25 @@ interface Book {
   selector: 'app-book-detail',
   styleUrl: './book-detail.css',
   templateUrl: './book-detail.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class BookDetail {
   route = inject(ActivatedRoute);
   router = inject(Router);
   bookService = inject(BookService);
-
+  cdr = inject(ChangeDetectorRef);
   book?: Book;
-  bookIndex = 0;
-  allBooks: Book[] = [];
 
   ngOnInit() {
-    const nameFromUrl = this.route.snapshot.paramMap.get('bookName');
-    this.bookService.getBooks().subscribe((books) =>{
-        this.allBooks = books;
-    });
+    const idUrl =this.route.snapshot.paramMap.get('id');
 
-    for (let i = 0; i < this.allBooks.length; i++) {
-      if (this.allBooks[i].name === nameFromUrl) {
-        this.book = this.allBooks[i];
-        this.bookIndex = i;
-      }
+    if (idUrl !== null) {
+      const id = Number(idUrl);
+      this.bookService.getBook(id).subscribe((book) => {
+        this.book = book;
+        this.cdr.detectChanges();
+      });
     }
   }
 

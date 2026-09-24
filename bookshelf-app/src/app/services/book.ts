@@ -17,13 +17,11 @@ export class BookService {
     getBooks(){
         return this.http.get<Book[]>('http://localhost:3000/get_books');
     }
-    /*
-    addBook(newBook: Book) {
-        this.http.get('/books')
-        this.bookshelf.push(newBook);
 
+    getBook(id: number){
+        return this.http.get<Book>(`http://localhost:3000/get_book/${id}`);
     }
-        */
+    
     createBook(book: Omit<Book,'id'>){
       return this.http.post<Book>('http://localhost:3000/create_book', book);
     }
