@@ -3,4 +3,5 @@ export interface Book {
     name: string;
     description: string;
     urlImage: string;
+    storeId: number;
 }

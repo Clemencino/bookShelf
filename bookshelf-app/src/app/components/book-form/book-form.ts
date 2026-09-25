@@ -31,7 +31,6 @@ export class BookFormComponent {
   cdr = inject(ChangeDetectorRef);
   isEdit = false;
 
-
   ngOnInit() {
     const idUrl = this.route.snapshot.paramMap.get('id');
     if (idUrl !== null) {

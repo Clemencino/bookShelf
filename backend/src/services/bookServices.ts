@@ -1,55 +1,50 @@
 import { books } from '../data.ts';
-
 import type { Book } from '../data.ts';
-export function getAllBooks() {
+import { pool } from '../db/postgres';
+
+function toCamelCase(book: Book){
+    return {id: book.id,name: book.name,description: book.description, urlImage: book.url_image, storeId:book.store_id};
+}
+
+export async function getAllBooks() {
+    const request = await pool.query('SELECT * from books');
+    const books = [];
+    for (const book of request.rows){
+        books.push(toCamelCase(book));
+    }
+
     return books;
 }
-export function getBook(id: number): Book |null{
-    for (const book of books) {
-        if (book.id === id) {
-            return book;
-        }
+
+export async function getBook(id: number): Book |null{
+    const res = await pool.query('SELECT * FROM books where id=$1', [id]);
+    if (res.rows.length === 0){
+        return null;
     }
-    return null;
+    return toCamelCase(res.rows[0]);
 }
 
-export function deleteBook(id: number): boolean {
-    for (let i = 0; i < books.length; i++) {
-        if (books[i].id === id) {
-            books.splice(i,1);
-            return true;
-        }
+export async function deleteBook(id: number): boolean {
+    const res = await pool.query('DELETE FROM books where id=$1', [id]);
+    if (res.rowCount === 1){
+        return true;
     }
     return false;
 }
 
-export function addBook(toadd: Omit<Book,'id'>): Book{
-    let newId = 1;
-    for (const book of books) {
-        if (book.id >= newId) {
-            newId =book.id+ 1;
-        }
-    }
-    const book: Book = {
-        id: newId,
-        name: toadd.name,
-        description: toadd.description,
-        urlImage: toadd.urlImage
-    };
-
-    books.push(book);
-    return book;
+export async function addBook(toadd: Omit<Book,'id'>): Book{
+    const res = await pool.query(`INSERT INTO books (name, description, url_image, store_id) 
+        VALUES ($1, $2, $3, $4) RETURNING *`,[toadd.name, toadd.description, toadd.urlImage, 1]);
+    return toCamelCase(res.rows[0]);
 }
 
-export function updateBook(id: number,newName: string,newDescription: string, newUrlImage: string):Book | null {
+export async function updateBook(id: number,newName: string,newDescription: string, newUrlImage: string, newStoreId: number):Book | null {
 
-    const book = getBook(id);
-    if (book === null){
+    const res = await pool.query(`UPDATE books SET name =$1, description=$2, url_image=$3, store_id=$4 
+        WHERE id = $5 RETURNING *`,[newName,newDescription,newUrlImage, 1, id ]);
+    if (res.rows.length === 0) {
         return null;
     }
-    book.name = newName;
-    book.description = newDescription;
-    book.urlImage = newUrlImage;
 
-    return book;
+    return toCamelCase(res.rows[0]);
 }

@@ -1,12 +1,14 @@
 $kind: http-request
-url: http://localhost:3000/update_book
+url: http://localhost:3000/update_book/6
 method: PUT
 body:
   type: json
   content: |-
     {
-      "name": "Book1",
-      "description": "This is a new description",
-      "urlImage": "assets/bookCover1.png"
+        "id": 6,
+        "name": "Book1",
+        "description": "This is a new description",
+        "url_image": "assets/bookCover1.png",
+        "store_id": 1
     }
 order: 4502514906939165

@@ -9,5 +9,5 @@ import { RouterLink } from '@angular/router'
   templateUrl: './book.html',
 })
 export class Book {
-  @Input({}) book: IBook = {id: 0, name: "", description:"", urlImage:""}; 
+  @Input() book!: IBook; 
 }
