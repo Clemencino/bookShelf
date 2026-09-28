@@ -1,6 +1,6 @@
 import { Component , Input } from '@angular/core';
-import { Book as IBook } from '../../../../models/book';
 import { RouterLink } from '@angular/router'
+import { BookResponse as IBook }from '@org/booklib'
 
 @Component({
   imports: [ RouterLink ],

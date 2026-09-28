@@ -1,8 +1,10 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "rootDir": ".",
+    "outDir": "./dist",
+    "rootDir": "./src",
     "sourceMap": true,
+    "types":["jest"],
     "declaration": false,
     "moduleResolution": "bundler",
     "emitDecoratorMetadata": true,
@@ -23,9 +25,9 @@
       "@org/shop/feature-products": [
         "./packages/shop/feature-products/src/index.ts"
       ],
-      "@org/shop/shared-ui": ["./packages/shop/shared-ui/src/index.ts"],
-      "@org/booklib": ["./libs/booklib/src/index.ts"]
+      "@org/shop/shared-ui": ["./packages/shop/shared-ui/src/index.ts"]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp"],
+  "include": ["src/**/*.ts", "tests/**/*.test.ts"]
 }

@@ -1,14 +1,13 @@
-import { books } from '../data';
-import type { Book } from '../data';
+import type { Book } from '@org/booklib';
 import { pool } from '../db/postgres';
-import type { BookResponse, CreateBook } from '../data';
+import type { BookResponse, CreateBook } from '@org/booklib';
 
 
-function toCamelCase(book: Book){
+function toCamelCase(book: Book): BookResponse{
     return {id: book.id,name: book.name,description: book.description, urlImage: book.url_image, storeId:book.store_id};
 }
 
-export async function getAllBooks() {
+export async function getAllBooks() : Promise<BookResponse[]>{
     const request = await pool.query('SELECT * from books');
     const books = [];
     for (const book of request.rows){

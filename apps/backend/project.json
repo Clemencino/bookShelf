@@ -7,7 +7,7 @@
     "serve": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "tsx watch src/app.ts",
+        "command": "tsx watch src/server.ts",
         "cwd": "apps/backend"
       }
     }

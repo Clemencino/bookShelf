@@ -1,16 +1,9 @@
-import { Component, input, output, inject} from '@angular/core';
+import { Component, inject} from '@angular/core';
 import { FormsModule} from '@angular/forms'
-import { Router, RouterLink} from '@angular/router'
+import { Router} from '@angular/router'
 import { BookService } from '../../services/book'
 import { ActivatedRoute } from '@angular/router'
 import { ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core'
-
-interface Book {
-  id: number;
-  name: string;
-  description: string;
-  urlImage: string,
-}
 
 @Component({
   imports: [ FormsModule ],
@@ -40,7 +33,7 @@ export class BookFormComponent {
       this.bookService.getBook(id).subscribe((book) => {
         this.newBookName = book.name;
         this.newBookDescription = book.description;
-        this.newUrlImage = book.urlImage;
+        this.newUrlImage = book.url_image;
 
         this.cdr.detectChanges();
       });
@@ -56,7 +49,7 @@ export class BookFormComponent {
     const newBook = {
       name: this.newBookName,
       description: this.newBookDescription,
-      urlImage: this.newUrlImage
+      urlImage: this.newUrlImage,
     };
 
     const idUrl = this.route.snapshot.paramMap.get('id');

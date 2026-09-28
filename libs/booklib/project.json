@@ -1,0 +1,19 @@
+{
+  "name": "booklib",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/booklib/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/booklib",
+        "main": "libs/booklib/src/index.ts",
+        "tsConfig": "libs/booklib/tsconfig.lib.json",
+        "assets": ["libs/booklib/*.md"]
+      }
+    }
+  }
+}

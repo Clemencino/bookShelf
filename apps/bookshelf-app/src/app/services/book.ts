@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { Book } from '../models/book'
+import { Book, CreateBook } from '@org/booklib'
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +16,7 @@ export class BookService {
         return this.http.get<Book>(`http://localhost:3000/get_book/${id}`);
     }
     
-    createBook(book: Omit<Book,'id'| 'storeId'>){
+    createBook(book: Omit<CreateBook,'id'| 'storeId'>){
         return this.http.post<Book>('http://localhost:3000/create_book', book);
     }
     
@@ -24,7 +24,7 @@ export class BookService {
         return this.http.delete(`http://localhost:3000/delete_book/${id}`);
     }
 
-    updateBook(id: number, book: Omit<Book, 'id'| 'storeId'>){
+    updateBook(id: number, book: Omit<CreateBook, 'id'| 'storeId'>){
         return this.http.put(`http://localhost:3000/update_book/${id}`, book);
     }
 }
