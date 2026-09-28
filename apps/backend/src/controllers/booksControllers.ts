@@ -26,13 +26,16 @@ export async function deleteBook(req: Request, res: Response) {
 }
 
 export async function addBook(req: Request, res: Response) {
+    console.log(req.body);
+
     const newBook = await bookService.addBook(req.body);
+
     return res.status(201).json(newBook);
 }
 
 export async function updateBook(req: Request, res: Response) {
     const id = Number(req.params['id']);
-    const newBook = await bookService.updateBook(id,req.body.name,req.body.description,req.body.urlImage, req.body.storeId);
+    const newBook = await bookService.updateBook(id,req.body.name,req.body.description,req.body.urlImage);
     if (newBook === null) {
         return res.status(404).json({ message: "Book not found" });
     }

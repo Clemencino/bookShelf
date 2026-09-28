@@ -14,6 +14,12 @@ export interface BookResponse {
     storeId: number;
 }
 
+export interface CreateBook {
+    name: string;
+    description: string;
+    urlImage: string;
+}
+
 export const books : Book[] = [
     {"id":1,"name":"Book1","description":"BlaBlaBla","url_image":"assets/bookCover1.png", "store_id":1},
     {"id":2,"name":"Book2","description":"zzzZZZZ","url_image":"assets/bookCover1.png", "store_id" :1},

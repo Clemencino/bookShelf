@@ -1,7 +1,7 @@
 import { books } from '../data';
 import type { Book } from '../data';
 import { pool } from '../db/postgres';
-import type { BookResponse } from '../data';
+import type { BookResponse, CreateBook } from '../data';
 
 
 function toCamelCase(book: Book){
@@ -34,13 +34,14 @@ export async function deleteBook(id: number): Promise<boolean> {
     return false;
 }
 
-export async function addBook(toadd: Omit<Book,'id'>): Promise<BookResponse>{
+export async function addBook(toadd: Omit<CreateBook,'id'>): Promise<BookResponse>{
     const res = await pool.query(`INSERT INTO books (name, description, url_image, store_id) 
-        VALUES ($1, $2, $3, $4) RETURNING *`,[toadd.name, toadd.description, toadd.url_image, 1]);
+        VALUES ($1, $2, $3, $4) RETURNING *`,[toadd.name, toadd.description, toadd.urlImage, 1]);
+        console.log(res.rows[0]);
     return toCamelCase(res.rows[0]);
 }
 
-export async function updateBook(id: number,newName: string,newDescription: string, newUrlImage: string, newStoreId: number):Promise<BookResponse | null> {
+export async function updateBook(id: number,newName: string,newDescription: string, newUrlImage: string):Promise<BookResponse | null> {
 
     const res = await pool.query(`UPDATE books SET name =$1, description=$2, url_image=$3, store_id=$4 
         WHERE id = $5 RETURNING *`,[newName,newDescription,newUrlImage, 1, id ]);
