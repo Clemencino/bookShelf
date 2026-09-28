@@ -19,7 +19,7 @@ export async function getBook(req:Request, res:Response) {
 }
 
 export async function deleteBook(req: Request, res: Response) {
-    if (await bookService.deleteBook(Number(req.params['id)']))){
+    if (await bookService.deleteBook(Number(req.params['id']))){
         return res.status(204).send();
     }
     return res.status(404).json({ message: "book not found" });
@@ -31,8 +31,6 @@ export async function addBook(req: Request, res: Response) {
 }
 
 export async function updateBook(req: Request, res: Response) {
-        console.log(req.body);
-
     const id = Number(req.params['id']);
     const newBook = await bookService.updateBook(id,req.body.name,req.body.description,req.body.urlImage, req.body.storeId);
     if (newBook === null) {
