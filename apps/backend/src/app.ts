@@ -1,5 +1,6 @@
-import express, { type Express, type Request, type Response } from 'express';
-import { router } from './routes/booksRoutes';
+import express, { type Express, type Request, type Response } from 'express'
+import { router as booksRouter } from './routes/booksRoutes'
+import { router as usersRouter } from './routes/userRoutes'
 import cors from 'cors';
 export const app: Express = express();
 
@@ -10,7 +11,9 @@ app.get('/', (req: Request, res: Response) => {
 app.use(cors());
 app.use(express.json());
 
-app.use('/', router);
+app.use('/', booksRouter);
+app.use('/', usersRouter);
+
 //app.listen(3000);
 
 
