@@ -45,3 +45,11 @@ export async function updateUser(id: number,newFirstName: string,newLastName: st
 
     return res.rows[0];
 }
+
+export async function checkUser(email: string, password: string):Promise<UserCreated | null> {
+    const res = await pool.query('SELECT * FROM users WHERE email=$1', [email]);
+    if (res.rows.length === 0 || res.rows[0].password !== password) {
+        return null;
+    }
+    return res.rows[0];
+}

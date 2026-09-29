@@ -13,6 +13,8 @@ router.post('/create_user', userController.addUser);
 
 router.put('/update_user/:id', userController.updateUser);
 
+router.get('/get_check_user/', userController.checkUser);
+
 /*
 GET /get_users
 GET /get_user/:id

@@ -1,6 +1,7 @@
 import express, { type Express, type Request, type Response} from 'express';
 import * as userService from '../services/userServices'
 import { UserCreated, UserToLog } from '@org/userlib'
+import ca from '@angular/common/locales/ca';
 
 const app: Express = express();
 
@@ -41,4 +42,12 @@ export async function updateUser(req: Request, res: Response) :Promise<Response<
     return res.json(newUser);
 }
 
-
+export async function checkUser(req: Request, res: Response) : Promise<Response<UserCreated>> {
+    const email = req.body.email;
+    const password = req.body.password;
+    const canLogged = await userService.checkUser(email, password);
+    if (!canLogged) {
+        return res.status(404).json({message : "User or password incorrect"})
+    }
+    return res.json(canLogged);
+}
