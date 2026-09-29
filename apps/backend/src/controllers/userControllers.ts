@@ -1,7 +1,6 @@
 import express, { type Express, type Request, type Response} from 'express';
 import * as userService from '../services/userServices'
 import { UserCreated, UserToLog } from '@org/userlib'
-import ca from '@angular/common/locales/ca';
 
 const app: Express = express();
 

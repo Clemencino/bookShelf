@@ -4,6 +4,7 @@ import { FormsModule} from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
 import { ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core'
 import { UserToLog } from '@org/userlib'
+import { UserService } from '../../services/user'
 
 @Component({
   imports: [FormsModule, RouterLink],
@@ -16,19 +17,31 @@ export class UserLoginComponent {
   router = inject(Router);
   route = inject(ActivatedRoute);
   cdr = inject(ChangeDetectorRef);
+  userService = inject(UserService);
   login = '';
   password = '';
   cancel() {
-    this.router.navigate(['/userLogin']);
-  }
+    this.router.navigate(['/']);
+  } 
   submit() {
-      const user : UserToLog = {
+    if (this.login.trim() === '' || this.password.trim() === ''){
+      return;
+    }
+    const user : UserToLog = {
       email: this.login,
       password: this.password,
     };
-    this.router.navigate(['/userCreateAccount']);
-    console.log(user);
-    // endpoint 
+    this.userService.checkLoginUser(user).subscribe((response) => {
+      if (response !== null) {
+        console.log('Connected');
+        console.log(response);
+        this.router.navigate(['/']);
+      }
+      else{
+        console.log('password or login incorrect');
+      }
+
+    });
   }
   
 

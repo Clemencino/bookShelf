@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { UserCreated, UserToLog } from '@org/userlib'
+import { TrailingSlashPathLocationStrategy } from '@angular/common';
 
 @Injectable({
     providedIn: 'root'
@@ -26,5 +27,9 @@ export class UserService {
 
     updateUser(id: number, book: Omit<UserCreated, 'id'>){
         return this.http.put(`http://localhost:3000/update_user/${id}`, book);
+    }
+
+    checkLoginUser(user: UserToLog){
+        return this.http.post(`http://localhost:3000/post_user_login/`, user);
     }
 }
