@@ -1,0 +1,15 @@
+$kind: http-request
+description: ""
+url: http://localhost:3000/update_book/1
+method: PUT
+body:
+  type: json
+  content: |-
+    {
+        "id": 1,
+        "first_name": "HouHouUpdated",
+        "last_name": "L'Hibou",
+        "email": "hibou@hibou.com",
+        "password": "123456789"
+    }
+order: 4137965094699007

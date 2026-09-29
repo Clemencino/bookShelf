@@ -1,0 +1,8 @@
+$kind: http-request
+description: ""
+url: http://localhost:3000/get_user/1
+method: GET
+body:
+  type: json
+  content: ""
+order: 498950085804031

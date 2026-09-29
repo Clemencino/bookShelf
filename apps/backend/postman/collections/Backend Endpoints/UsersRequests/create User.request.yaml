@@ -1,0 +1,14 @@
+$kind: http-request
+description: ""
+url: http://localhost:3000/create_user
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "id": 1,
+        "first_name": "HouHou",
+        "last_name": "L'Hibou",
+        "email": "hibou@hibou.com",
+        "password": "1234"
+    }

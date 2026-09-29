@@ -1,0 +1,5 @@
+$kind: http-request
+description: ""
+url: http://localhost:3000/delete_user/1
+method: DELETE
+order: 3377791411159039
