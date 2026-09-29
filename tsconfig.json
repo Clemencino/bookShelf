@@ -1,33 +1,9 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "sourceMap": true,
-    "types":["jest"],
-    "declaration": false,
-    "moduleResolution": "bundler",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
-    "lib": ["es2020", "dom"],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "paths": {
-      "@org/api/products": ["./packages/api/products/src/index.ts"],
-      "@org/models": ["./packages/shared/models/src/index.ts"],
-      "@org/shop/data": ["./packages/shop/data/src/index.ts"],
-      "@org/shop/feature-product-detail": [
-        "./packages/shop/feature-product-detail/src/index.ts"
-      ],
-      "@org/shop/feature-products": [
-        "./packages/shop/feature-products/src/index.ts"
-      ],
-      "@org/shop/shared-ui": ["./packages/shop/shared-ui/src/index.ts"]
-    }
-  },
+  "extends": "./tsconfig.base.json",
   "exclude": ["node_modules", "tmp"],
-  "include": ["src/**/*.ts", "tests/**/*.test.ts"]
+  "include": ["src/**/*.ts", "tests/**/*.test.ts"],
+  "references": [
+    { "path" : "./apps/backend"},
+    { "path": "./apps/bookshelf-app"}
+  ]
 }

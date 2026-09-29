@@ -9,7 +9,10 @@
     "isolatedModules": true,
     "target": "es2022",
     "emitDecoratorMetadata": false,
-    "module": "preserve"
+    "module": "preserve",
+    "types": [
+      "mocha"
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
