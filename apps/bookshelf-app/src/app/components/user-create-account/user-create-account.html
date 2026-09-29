@@ -21,7 +21,11 @@
         <input [(ngModel)]="confirm_password" type="password">
     </div>
 
-    
+    <div class="is-correct">
+        @if (!isSamePassword) {
+            *password must be the same
+        }
+    </div>
     <div class="form-buttons">
         <button class="cancel" (click)="cancel()">Cancel</button>
         <button class="submit" (click)="submit()">Submit</button>

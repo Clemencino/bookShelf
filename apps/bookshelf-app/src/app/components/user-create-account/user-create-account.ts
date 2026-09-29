@@ -25,61 +25,34 @@ export class UserCreateComponent {
   password = '';
   confirm_password = '';
   id = 0;
-  isSamePassword = false;
+  isSamePassword = true;
   cancel() {
     this.router.navigate(['/userLogin']);
   }
   async submit() {
-    if (this.first_name.trim() === '' || this.last_name.trim() === '' || this.login.trim() === '' ||
-    this.password.trim() === '' || this.confirm_password.trim() === '' || this.confirm_password !== this.password){
+    if (this.first_name.trim() === '' || this.last_name.trim() === '' || this.login.trim() === ''){
       return;
     }
-    const hashedPassword = await hash(this.password, 10);
-    const user : UserCreated = {
-      id : this.id,
-      first_name: this.first_name,
-      last_name: this.last_name,
-      email: this.login,
-      password: hashedPassword
-    };
-    this.userService.createUser(user).subscribe(() =>{
-      console.log('user created :'+ JSON.stringify(user));
-      this.router.navigate(['/']);
-    });
-
-    // endpoint 
-  }
-
-  
+    if (this.password!== '' && this.confirm_password!=='' && this.password === this.confirm_password) {
+      this.isSamePassword = true;
+      const hashedPassword = await hash(this.password, 10);
+      const user : UserCreated = {
+        id : this.id,
+        first_name: this.first_name,
+        last_name: this.last_name,
+        email: this.login,
+        password: hashedPassword
+      };
+      this.userService.createUser(user).subscribe(() =>{
+        console.log('user created :'+ JSON.stringify(user));
+        this.router.navigate(['/']);
+      });
+    }
+    else{
+      this.isSamePassword = false;
+    }
+    
+  }  
   
 }
 
-
-/*
-submit() {
-    if (this.newBookName.trim() === ''){
-      return;
-    }
-    const newBook = {
-      name: this.newBookName,
-      description: this.newBookDescription,
-      urlImage: this.newUrlImage,
-    };
-
-    const idUrl = this.route.snapshot.paramMap.get('id');
-    if (idUrl === null) {
-      this.bookService.createBook(newBook).subscribe((book) => {
-        console.log('book created');
-        this.router.navigate(['/']);
-      });
-    }
-    else
-    {
-      const id = Number(idUrl);
-      this.bookService.updateBook(id, newBook).subscribe(() =>{
-        console.log('book updated');
-        this.router.navigate(['/']);
-      });
-    }
-
-*/
