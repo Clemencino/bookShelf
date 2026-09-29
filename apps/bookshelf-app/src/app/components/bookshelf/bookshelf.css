@@ -41,6 +41,7 @@
 }
 
 .placeholder img {
+    padding-top: 40px;;
     width: 100px;
     border-radius: 70%;
     height: 100px;
@@ -54,4 +55,10 @@
 
 .userProfile {
     transition: .3s ease;
+}
+
+.container {
+    background-color: #fcf6e9;
+    min-height: 100vh;
+    width: 100%;
 }

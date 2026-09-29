@@ -20,6 +20,7 @@ export class UserLoginComponent {
   userService = inject(UserService);
   login = '';
   password = '';
+  isCorrect = true;
   cancel() {
     this.router.navigate(['/']);
   } 
@@ -39,6 +40,8 @@ export class UserLoginComponent {
       }
       else{
         console.log('password or login incorrect');
+        this.isCorrect = false;
+        this.cdr.detectChanges();
       }
 
     });
