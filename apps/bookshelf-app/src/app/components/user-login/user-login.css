@@ -11,7 +11,7 @@
 
 .form-field-name {
     width: 400px;
-    margin-top: 170px;
+    margin-top: 40px;
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -96,4 +96,11 @@
 
 .incorrectLogin {
     color: red;
+}
+
+a:visited{
+    color:blue;
+}
+a:hover{
+    color:rgb(104, 104, 255);
 }
