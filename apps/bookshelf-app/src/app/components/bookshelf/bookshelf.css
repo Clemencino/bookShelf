@@ -44,9 +44,14 @@
     width: 100px;
     border-radius: 70%;
     height: 100px;
-    
+    transition: .5s ease;
 }
 
 .placeholder img:hover {
     cursor: pointer;
+    opacity: 0.5;
+}
+
+.userProfile {
+    transition: .3s ease;
 }
