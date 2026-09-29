@@ -3,15 +3,15 @@ import * as userController from '../controllers/userControllers'
 
 export const router = express.Router();
 
-router.get('/get_books', userController.getAllUsers);
+router.get('/get_users', userController.getAllUsers);
 
-router.get('/get_book/:id', userController.getUser);
+router.get('/get_user/:id', userController.getUser);
 
-router.delete('/delete_book/:id', userController.deleteUser);
+router.delete('/delete_user/:id', userController.deleteUser);
 
-router.post('/create_book', userController.addUser);
+router.post('/create_user', userController.addUser);
 
-router.put('/update_book/:id', userController.updateUser);
+router.put('/update_user/:id', userController.updateUser);
 
 /*
 GET /get_users
