@@ -1,14 +1,14 @@
-import { Component , inject, numberAttribute} from '@angular/core';
-import { Router, RouterLink } from '@angular/router'
+import { Component , inject} from '@angular/core';
+import { Router  } from '@angular/router'
 import { FormsModule} from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
 import { ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core'
 import { UserCreated } from '@org/userlib'
 import { UserService } from '../../services/user'
-
+import { hash } from "bcrypt-ts";
 
 @Component({
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule],
   selector: 'app-user-create-account',
   styleUrl: './user-create-account.css',
   templateUrl: './user-create-account.html',
@@ -29,17 +29,18 @@ export class UserCreateComponent {
   cancel() {
     this.router.navigate(['/userLogin']);
   }
-  submit() {
+  async submit() {
     if (this.first_name.trim() === '' || this.last_name.trim() === '' || this.login.trim() === '' ||
     this.password.trim() === '' || this.confirm_password.trim() === '' || this.confirm_password !== this.password){
       return;
     }
+    const hashedPassword = await hash(this.password, 10);
     const user : UserCreated = {
       id : this.id,
       first_name: this.first_name,
       last_name: this.last_name,
       email: this.login,
-      password: this.password,
+      password: hashedPassword
     };
     this.userService.createUser(user).subscribe(() =>{
       console.log('user created :'+ JSON.stringify(user));

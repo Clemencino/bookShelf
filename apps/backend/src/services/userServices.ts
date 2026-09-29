@@ -1,6 +1,6 @@
 import type { UserToLog, UserCreated } from '@org/userlib';
 import { pool } from '../db/postgres';
-
+import { compareSync } from "bcrypt-ts";
 export async function getUsers(): Promise<UserCreated[]> {
     const request = await pool.query('SELECT * from users');
     const users = [];
@@ -48,7 +48,12 @@ export async function updateUser(id: number,newFirstName: string,newLastName: st
 
 export async function checkUser(email: string, password: string):Promise<UserCreated | null> {
     const res = await pool.query('SELECT * FROM users WHERE email=$1', [email]);
-    if (res.rows.length === 0 || res.rows[0].password !== password) {
+    if (res.rows.length === 0) {
+        return null;
+    }
+    const isGoodPassword = await compareSync(password, res.rows[0].password);
+    console.log(isGoodPassword);
+    if (!isGoodPassword) {
         return null;
     }
     return res.rows[0];
