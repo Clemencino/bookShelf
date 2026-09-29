@@ -46,8 +46,8 @@ export async function checkUser(req: Request, res: Response) : Promise<Response<
     const email = req.body.email;
     const password = req.body.password;
     const canLogged = await userService.checkUser(email, password);
-    if (!canLogged) {
-        return res.status(404).json({message : "User or password incorrect"})
+    if (canLogged === null) {
+        return res.status(401).json({message : "User or password incorrect"})
     }
     return res.json(canLogged);
 }
