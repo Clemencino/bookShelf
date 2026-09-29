@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { Book, CreateBook } from '@org/booklib'
+import { Book, BookResponse, CreateBook } from '@org/booklib'
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +9,7 @@ export class BookService {
 
     constructor(private http: HttpClient) {}
     getBooks(){
-        return this.http.get<Book[]>('http://localhost:3000/get_books');
+        return this.http.get<BookResponse[]>('http://localhost:3000/get_books');
     }
 
     getBook(id: number){

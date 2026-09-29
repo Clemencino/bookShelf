@@ -1,12 +1,12 @@
-import { Component, inject} from '@angular/core';
+import { Component} from '@angular/core';
 import { RouterLink } from '@angular/router'
 import { BookService } from '../../services/book';
-import { Book as IBook } from '@org/booklib';
+import { BookResponse as IBook } from '@org/booklib';
 import { Book }from './components/book/book';
 import { ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core'
 
 @Component({
-  imports: [ RouterLink , Book ],
+  imports: [ RouterLink , Book],
   standalone: true,
   selector: 'app-bookshelf',
   styleUrl: './bookshelf.css',

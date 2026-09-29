@@ -19,13 +19,6 @@
     background-color: #d36949;
 }
 
-.placeholder {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-}
 
 .book-infos {
     width: 420px;
@@ -38,4 +31,22 @@
     grid-template-columns:repeat(2, 200px);
     gap: 20px;
     
+}
+
+.placeholder {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-direction: column;
+}
+
+.placeholder img {
+    width: 100px;
+    border-radius: 70%;
+    height: 100px;
+    
+}
+
+.placeholder img:hover {
+    cursor: pointer;
 }
