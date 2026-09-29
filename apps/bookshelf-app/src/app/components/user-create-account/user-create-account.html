@@ -1,0 +1,28 @@
+<div class="form">
+    <div class="form-field-name">
+        First Name:
+        <input [(ngModel)]="first_name"/>
+    </div>
+    <div class="form-field-url">
+        Last Name:
+        <input [(ngModel)]="last_name"/>
+    </div>
+    <div class="form-field-url">
+        Email:
+        <input [(ngModel)]="login"/>
+    </div>
+    <div class="form-field-url">
+        Password:
+        <input [(ngModel)]="password"/>
+    </div>
+
+    <div class="form-field-url">
+        Confirm Password:
+        <input [(ngModel)]="confirm_password" type="password">
+    </div>
+
+    
+    <div class="form-buttons">
+        <button class="cancel" (click)="cancel()">Cancel</button>
+        <button class="submit" (click)="submit()">Submit</button>
+    </div>

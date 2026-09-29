@@ -1,0 +1,69 @@
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router'
+import { FormsModule} from '@angular/forms'
+import { ActivatedRoute } from '@angular/router'
+import { ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core'
+import { UserToLog } from '@org/userlib'
+
+@Component({
+  imports: [FormsModule, RouterLink],
+  selector: 'app-user-login',
+  styleUrl: './user-login.css',
+  templateUrl: './user-login.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class UserLoginComponent {
+  router = inject(Router);
+  route = inject(ActivatedRoute);
+  cdr = inject(ChangeDetectorRef);
+  login = '';
+  password = '';
+  submit() {
+      const user : UserToLog = {
+      email: this.login,
+      password: this.password,
+    };
+    this.router.navigate(['/userCreateAccount']);
+    console.log(user);
+    // endpoint 
+  }
+  
+
+}
+/*
+export class BookFormComponent {
+ 
+
+  
+}
+  annuler() {
+    this.router.navigate(['/']);
+  }
+  submit() {
+    if (this.newBookName.trim() === ''){
+      return;
+    }
+    const newBook = {
+      name: this.newBookName,
+      description: this.newBookDescription,
+      urlImage: this.newUrlImage,
+    };
+
+    const idUrl = this.route.snapshot.paramMap.get('id');
+    if (idUrl === null) {
+      this.bookService.createBook(newBook).subscribe((book) => {
+        console.log('book created');
+        this.router.navigate(['/']);
+      });
+    }
+    else
+    {
+      const id = Number(idUrl);
+      this.bookService.updateBook(id, newBook).subscribe(() =>{
+        console.log('book updated');
+        this.router.navigate(['/']);
+      });
+    }
+  }
+}
+  */

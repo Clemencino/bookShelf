@@ -1,0 +1,30 @@
+<div class="form">
+    <div class="form-field-name">
+        email:
+        <input [(ngModel)]="login"/>
+    </div>
+
+    <div class="form-field-url">
+        password:
+        <input [(ngModel)]="password" type="password">
+    </div>
+    <div class ="noAccount">
+        <a href="url" routerLink="/userCreateAccount">No account</a>
+    </div>
+    <div class="form-buttons">
+        <button class="submit" (click)="submit()">Submit</button>
+    </div>
+
+<!--
+    <div class="form-buttons">
+        <button class="cancel" (click)="annuler()">Cancel</button>
+        <button class="add" (click)="submit()">
+            @if (isEdit) {
+                Edit}
+            @else{
+                Add
+            }
+        </button>
+    </div>
+</div>
+-->
