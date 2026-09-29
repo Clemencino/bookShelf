@@ -18,6 +18,9 @@ export class UserLoginComponent {
   cdr = inject(ChangeDetectorRef);
   login = '';
   password = '';
+  cancel() {
+    this.router.navigate(['/userLogin']);
+  }
   submit() {
       const user : UserToLog = {
       email: this.login,
