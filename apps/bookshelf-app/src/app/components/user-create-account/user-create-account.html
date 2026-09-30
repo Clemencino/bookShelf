@@ -1,32 +1,59 @@
-<div class="form">
+<form class="form" #formName="ngForm" (ngSubmit)="formName.valid && submit()">
     <div class="form-field-name">
         First Name:
-        <input [(ngModel)]="first_name"/>
+        <input [(ngModel)]="first_name" name="first_name"/>
     </div>
     <div class="form-field-url">
         Last Name:
-        <input [(ngModel)]="last_name"/>
+        <input [(ngModel)]="last_name" name="last_name"/>
     </div>
     <div class="form-field-url">
-        Email:
-        <input [(ngModel)]="login"/>
+        *Email:
+        <input [(ngModel)]="login" name="login" required #email="ngModel" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"/>
+        @if ((formName.submitted || email.touched) && email.invalid){
+            @if (email.errors?.['required']) {
+                <div class="is-correct">
+                    *email is required.
+                </div>
+            }
+
+            @if (email.errors?.['pattern']) {
+                <div class="is-correct">
+                    *invalid email.
+                </div>
+            }
+        }
     </div>
     <div class="form-field-url">
-        Password:
-        <input [(ngModel)]="password" type="password"/>
+        *Password:
+        <input [(ngModel)]="password" name="password" type="password" required #passwordd="ngModel"
+        pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" />
+        @if ((formName.submitted || passwordd.touched) && passwordd.invalid){
+            @if (passwordd.errors?.['required']) {
+                <div class="is-correct">
+                    *password is required.
+                </div>
+            }
+
+            @if (passwordd.errors?.['pattern']) {
+                <div class="is-correct">
+                    *password must contain at least 8 caracters, one uppercase, one lowercase, one digit and one special character.
+                </div>
+            }
+        }
     </div>
 
     <div class="form-field-url">
-        Confirm Password:
-        <input [(ngModel)]="confirm_password" type="password">
-    </div>
-
-    <div class="is-correct">
-        @if (!isSamePassword) {
-            *password must be the same
+        *Confirm Password:
+        <input [(ngModel)]="confirm_password" name="confirmPassword" type="password" required #confirmpassword="ngModel">
+        @if ((formName.submitted || confirmpassword.touched) && confirmpassword.invalid){
+            <div class="is-correct">
+                *please confirm.
+            </div>
         }
     </div>
     <div class="form-buttons">
-        <button class="cancel" (click)="cancel()">Cancel</button>
-        <button class="submit" (click)="submit()">Submit</button>
+        <button class="cancel" type="button" (click)="cancel()">Cancel</button>
+        <button class="submit" type="submit">Submit</button>
     </div>
+</form>

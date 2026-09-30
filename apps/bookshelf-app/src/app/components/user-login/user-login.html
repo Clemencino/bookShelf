@@ -1,28 +1,33 @@
-<div class="form">
+<form class="form" #formName="ngForm" (ngSubmit)="formName.valid && submit()">
     <img src="/assets/user.png" width="150px" style="padding-top: 100px;">
 
     <h1>User Connection</h1>
     <div class="form-field-name">
         email:
-        <input [(ngModel)]="login"/>
+        <input [(ngModel)]="login" name="email" required #email="ngModel"/>
+        @if (formName.submitted && email.invalid){
+            <div class="is-correct">
+                *email is required.
+            </div>
+        }
     </div>
 
     <div class="form-field-url">
         password:
-        <input [(ngModel)]="password" type="password">
-    </div>
-    
-    <div class = "incorrectLogin">
-        @if (!isCorrect) {
-            *login or password incorrect
+        <input [(ngModel)]="password" name="passwordd" type="password" required #passwordd="ngModel">
+        @if (formName.submitted && passwordd.invalid){
+            <div class="is-correct">
+                *password is required.
+            </div>
         }
     </div>
+    
     <div class ="noAccount">
         <a href="url" routerLink="/userCreateAccount">Create account</a>
     </div>
     <div class="form-buttons">
-        <button class="cancel" (click)="cancel()">Cancel</button>
-        <button class="submit" (click)="submit()">Submit</button>
+        <button class="cancel" type="button" (click)="cancel()">Cancel</button>
+        <button class="submit" type="submit">Submit</button>
     </div>
 
 <!--

@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router'
 import { ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core'
 import { UserCreated } from '@org/userlib'
 import { UserService } from '../../services/user'
+
 @Component({
   imports: [FormsModule],
   selector: 'app-user-create-account',
@@ -23,32 +24,42 @@ export class UserCreateComponent {
   password = '';
   confirm_password = '';
   id = 0;
-  isSamePassword = true;
   cancel() {
     this.router.navigate(['/userLogin']);
   }
-  async submit() {
-    if (this.first_name.trim() === '' || this.last_name.trim() === '' || this.login.trim() === ''){
-      return;
+  verifSamePassword() {
+      if (this.password !== this.confirm_password) {
+        return false;
+      }
+
+      return true;
+  }
+  submit() {
+    const user : UserCreated = {
+      id : this.id,
+      first_name: this.first_name,
+      last_name: this.last_name,
+      email: this.login,
+      password: this.password
     }
-    if (this.password!== '' && this.confirm_password!=='' && this.password === this.confirm_password) {
-      this.isSamePassword = true;
-      const user : UserCreated = {
-        id : this.id,
-        first_name: this.first_name,
-        last_name: this.last_name,
+    if (this.verifSamePassword())
+    {
+      console.log('SUBMIT', {
         email: this.login,
         password: this.password
-      };
+      });
+      console.log('USER ENVOYÉ AU BACKEND', user);
       this.userService.createUser(user).subscribe(() =>{
+        alert("account created");
         console.log('user created :'+ JSON.stringify(user));
-        this.router.navigate(['/']);
+        this.router.navigate(['/userLogin']);
       });
     }
-    else{
-      this.isSamePassword = false;
+    else {
+      alert("password must be the same");
+
     }
-    
+
   }  
   
 }

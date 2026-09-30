@@ -24,14 +24,15 @@ export class UserLoginComponent {
   cancel() {
     this.router.navigate(['/']);
   } 
-  submit() {
-    if (this.login.trim() === '' || this.password.trim() === ''){
-      return;
-    }
+  getUserToLog(): UserToLog {
     const user : UserToLog = {
       email: this.login,
       password: this.password,
     };
+    return user;
+  }
+  submit() {
+    const user = this.getUserToLog();
     this.userService.checkLoginUser(user).subscribe((response) => {
       if (response !== null) {
         console.log('Connected');
@@ -39,9 +40,8 @@ export class UserLoginComponent {
         this.router.navigate(['/']);
       }
       else{
-        console.log('password or login incorrect');
+        alert("password or login incorrect");
         this.isCorrect = false;
-        this.cdr.detectChanges();
       }
 
     });
