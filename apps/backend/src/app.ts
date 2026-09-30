@@ -1,6 +1,7 @@
 import express, { type Express, type Request, type Response } from 'express'
 import { router as booksRouter } from './routes/booksRoutes'
 import { router as usersRouter } from './routes/userRoutes'
+import { router as storesRouter } from './routes/storeRoutes'
 import cors from 'cors';
 export const app: Express = express();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.use('/', booksRouter);
 app.use('/', usersRouter);
+app.use('/', storesRouter);
 
 //app.listen(3000);
 
