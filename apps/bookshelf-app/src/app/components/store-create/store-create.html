@@ -1,0 +1,29 @@
+<form class="form" #formName="ngForm" (ngSubmit)="formName.valid && submit()">
+    <div class="title">
+        <h1>Add a Store:</h1>
+    </div>
+    <div class="form-field-name">
+        name:
+        <input [(ngModel)]="name" name="name" required #namee="ngModel"/>
+        @if (formName.submitted && namee.invalid){
+            <div class="is-correct">
+                *a name is required.
+            </div>
+        }
+    </div>
+
+    <div class="form-field-url">
+        description:
+        <input [(ngModel)]="description" name="description" required #descriptionn="ngModel">
+        @if (formName.submitted && descriptionn.invalid){
+            <div class="is-correct">
+                *a description is required.
+            </div>
+        }
+    </div>
+    
+    <div class="form-buttons">
+        <button class="cancel" type="button" (click)="cancel()">Cancel</button>
+        <button class="submit" type="submit">Submit</button>
+    </div>
+</form>

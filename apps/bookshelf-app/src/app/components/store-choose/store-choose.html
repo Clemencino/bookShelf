@@ -1,0 +1,11 @@
+<div class="selection-store">
+    <select (change)="getStoreID($event)" defaultValue="">
+    <option value="" disabled selected>Select a Store</option>
+
+    @for (store of stores; track store.id) {
+        <option [value]="store.id">{{ store.name }}</option>
+    }
+
+    <option value="create-store">Create a store</option>
+    </select>
+</div>

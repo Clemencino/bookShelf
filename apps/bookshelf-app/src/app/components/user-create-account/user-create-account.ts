@@ -25,7 +25,7 @@ export class UserCreateComponent {
   confirm_password = '';
   id = 0;
   cancel() {
-    this.router.navigate(['/userLogin']);
+    this.router.navigate(['']);
   }
   verifSamePassword() {
       if (this.password !== this.confirm_password) {
@@ -48,11 +48,10 @@ export class UserCreateComponent {
         email: this.login,
         password: this.password
       });
-      console.log('USER ENVOYÉ AU BACKEND', user);
       this.userService.createUser(user).subscribe(() =>{
         alert("account created");
         console.log('user created :'+ JSON.stringify(user));
-        this.router.navigate(['/userLogin']);
+        this.router.navigate(['/']);
       });
     }
     else {

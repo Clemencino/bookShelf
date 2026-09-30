@@ -37,7 +37,7 @@ export class UserLoginComponent {
       if (response !== null) {
         console.log('Connected');
         console.log(response);
-        this.router.navigate(['/']);
+        this.router.navigate(['/bookshelf']);
       }
       else{
         alert("password or login incorrect");

@@ -41,7 +41,7 @@
 }
 
 .placeholder img {
-    padding-top: 40px;;
+    padding-top: 170px;;
     width: 100px;
     border-radius: 70%;
     height: 100px;
@@ -61,4 +61,10 @@
     background-color: #fcf6e9;
     min-height: 100vh;
     width: 100%;
+}
+
+.selection-store {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

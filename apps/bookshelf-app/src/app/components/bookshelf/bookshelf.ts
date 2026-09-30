@@ -4,9 +4,10 @@ import { BookService } from '../../services/book';
 import { BookResponse as IBook } from '@org/booklib';
 import { Book }from './components/book/book';
 import { ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core'
+import { StoreChoose } from '../store-choose/store-choose'
 
 @Component({
-  imports: [ RouterLink , Book],
+  imports: [ RouterLink , Book, StoreChoose ],
   standalone: true,
   selector: 'app-bookshelf',
   styleUrl: './bookshelf.css',

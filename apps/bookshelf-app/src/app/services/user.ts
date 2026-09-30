@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { UserCreated, UserToLog } from '@org/userlib'
-import { TrailingSlashPathLocationStrategy } from '@angular/common';
 
 @Injectable({
     providedIn: 'root'
