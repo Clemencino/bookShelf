@@ -5,8 +5,6 @@ import { ActivatedRoute } from '@angular/router'
 import { ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core'
 import { UserCreated } from '@org/userlib'
 import { UserService } from '../../services/user'
-import { hash } from "bcrypt-ts";
-
 @Component({
   imports: [FormsModule],
   selector: 'app-user-create-account',
@@ -35,13 +33,12 @@ export class UserCreateComponent {
     }
     if (this.password!== '' && this.confirm_password!=='' && this.password === this.confirm_password) {
       this.isSamePassword = true;
-      const hashedPassword = await hash(this.password, 10);
       const user : UserCreated = {
         id : this.id,
         first_name: this.first_name,
         last_name: this.last_name,
         email: this.login,
-        password: hashedPassword
+        password: this.password
       };
       this.userService.createUser(user).subscribe(() =>{
         console.log('user created :'+ JSON.stringify(user));

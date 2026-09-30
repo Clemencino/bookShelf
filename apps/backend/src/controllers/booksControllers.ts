@@ -27,8 +27,7 @@ export async function deleteBook(req: Request, res: Response): Promise<Response<
 
 export async function addBook(req: Request, res: Response): Promise<Response<BookResponse>> {
     console.log(req.body);
-
-    const newBook = await bookService.addBook(req.body);
+    const newBook = await bookService.addBook(req.body, req.body.userId);
 
     return res.status(201).json(newBook);
 }
