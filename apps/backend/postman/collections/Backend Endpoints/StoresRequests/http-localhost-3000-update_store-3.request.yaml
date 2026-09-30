@@ -1,0 +1,13 @@
+$kind: http-request
+name: http://localhost:3000/update_store/3
+description: ""
+url: http://localhost:3000/update_store/3
+method: PUT
+body:
+  type: json
+  content: |-
+    {
+        "name": "Store2",
+        "description": "This is the second store"
+    }
+order: 2053924079009791

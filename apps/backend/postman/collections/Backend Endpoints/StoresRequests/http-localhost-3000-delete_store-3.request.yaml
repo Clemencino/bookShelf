@@ -1,0 +1,6 @@
+$kind: http-request
+name: http://localhost:3000/delete_store/3
+description: ""
+url: http://localhost:3000/delete_store/3
+method: DELETE
+order: 4269225659072511

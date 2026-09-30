@@ -1,0 +1,6 @@
+$kind: http-request
+name: http://localhost:3000/get_store/1
+description: ""
+url: http://localhost:3000/get_store/1
+method: GET
+order: 1400760358141951

@@ -1,0 +1,13 @@
+$kind: http-request
+name: http://localhost:3000/create_store
+description: ""
+url: http://localhost:3000/create_store
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "name": "Store1",
+        "description": "This is the first store"
+    }
+order: 1977491266732031

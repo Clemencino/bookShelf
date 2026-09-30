@@ -1,0 +1,5 @@
+$kind: http-request
+name: http://localhost:3000/get_stores
+description: ""
+url: http://localhost:3000/get_stores
+method: GET
