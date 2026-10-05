@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BookService } from '../../services/book';
 import { ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { Book } from '@org/booklib'
+import { Book, BookResponse } from '@org/booklib'
 
 @Component({
   imports: [ RouterLink ],
@@ -18,14 +18,19 @@ export class BookDetail {
   router = inject(Router);
   bookService = inject(BookService);
   cdr = inject(ChangeDetectorRef);
-  book?: Book;
-
+  book?: BookResponse;
+  storeId = 0;
   ngOnInit() {
-    const idUrl =this.route.snapshot.paramMap.get('id');
-
+    const storeIdUrl = this.route.snapshot.queryParamMap.get('storeId');
+    console.log("THIS IS THE STORE ID", storeIdUrl);
+    if(storeIdUrl !== null){
+      this.storeId = Number(storeIdUrl);
+    }
+    const idUrl = this.route.snapshot.paramMap.get('id');
     if (idUrl !== null) {
-      const id = Number(idUrl);
-      this.bookService.getBook(id).subscribe((book) => {
+      const bookId = Number(idUrl);
+      const storeId = Number(storeIdUrl);
+      this.bookService.getBook(bookId, storeId).subscribe((book) => {
         this.book = book;
         this.cdr.detectChanges();
       });
@@ -34,8 +39,12 @@ export class BookDetail {
 
   deleteBook(){
     if (this.book) {
-      this.bookService.deleteBook(this.book.id).subscribe(() => {
-      this.router.navigate(['/']);
+      const storeId = this.route.snapshot.queryParamMap.get('storeId');
+      if (storeId !== null ){
+        this.storeId = Number(storeId);
+      }
+      this.bookService.deleteBook(this.book.id, this.storeId).subscribe(() => {
+      this.router.navigate(['/bookshelf'], { queryParams: {storeId: this.storeId}});
     });
     }
   }

@@ -24,7 +24,6 @@ export class StoreService {
 
     createStore(store: Omit<Store, 'id'>) {
         const token = this.authService.getAccessToken();
-            console.log('TOKEN CREATE STORE :', token);
         return this.http.post('http://localhost:3000/create_store',store,
             {
                 headers:{

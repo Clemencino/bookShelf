@@ -8,8 +8,8 @@
         </div>
 
         <div class = "buttons">
-            <button class = "cancel" routerLink="/">Cancel</button>
-            <button class="edit" [routerLink]="['/editBook', book.id]">Edit book</button>
+            <button class = "cancel" [routerLink]="['/bookshelf']" [queryParams]="{ storeId: storeId }">Cancel</button>
+            <button class="edit" [routerLink]="['/editBook', book.id]" [queryParams]="{ storeId: storeId }">Edit book</button>
             <button class="delete" (click)="deleteBook()">Delete book</button>
         </div>
         

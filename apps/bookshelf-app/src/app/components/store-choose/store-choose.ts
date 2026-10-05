@@ -26,7 +26,6 @@ export class StoreChoose {
       this.router.navigate(['/storeForm']);
       return;
     }
-    console.log('Store selected:', storeId);
     this.router.navigate(['/bookshelf'],{queryParams: {storeId: Number(storeId)}});
 }
   ngOnInit() {

@@ -25,17 +25,17 @@ export class BookshelfComponent {
   constructor(private bookService: BookService, private cdr: ChangeDetectorRef) {}
   
   ngOnInit() {
-  this.route.queryParams.subscribe((params) => {
-    const storeId = Number(params['storeId']);
-    if (!storeId){
-      return;
-    }
-    this.bookService.getBooks(storeId).subscribe((books) => {
-      this.bookshelf = books;
-      this.cdr.detectChanges();
-    });
+    this.route.queryParams.subscribe((params) => {
+      const storeId = Number(params['storeId']);
+      if (!storeId){
+        return;
+      }
+      this.bookService.getBooks(storeId).subscribe((books) => {
+        this.bookshelf = books;
+        this.cdr.detectChanges();
+      });
 
-  });
+    });
 
 }
 logout() {

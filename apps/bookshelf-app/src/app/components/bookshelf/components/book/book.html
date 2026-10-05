@@ -1,5 +1,6 @@
 <div class="book">
-    <div class="placeholder" [routerLink]="['/book', book.id]">
+    <div class="placeholder" [routerLink]="['/book', book.id]" [queryParams]="{ storeId: book.storeId }">
+    
         <img id="bookimg"[src]="book.urlImage"/>
 
         <div class="book-title">

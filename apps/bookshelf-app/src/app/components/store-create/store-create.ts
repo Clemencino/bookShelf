@@ -33,7 +33,6 @@ export class StoreCreateComponent {
   submit() {
     const store = this.getStore();
     this.storeService.createStore(store).subscribe(() =>{
-        console.log('store created :'+ JSON.stringify(store));
         this.router.navigate(['/bookshelf']);
       });
   }

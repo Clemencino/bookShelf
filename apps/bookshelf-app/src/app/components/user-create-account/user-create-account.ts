@@ -44,13 +44,8 @@ export class UserCreateComponent {
     }
     if (this.verifSamePassword())
     {
-      console.log('SUBMIT', {
-        email: this.login,
-        password: this.password
-      });
       this.userService.createUser(user).subscribe(() =>{
         alert("account created");
-        console.log('user created :'+ JSON.stringify(user));
         this.router.navigate(['/']);
       });
     }

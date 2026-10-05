@@ -25,32 +25,39 @@ export class BookFormComponent {
   isEdit = false;
   storeId = 0;
   ngOnInit() {
-    const idUrl = this.route.snapshot.paramMap.get('id');
-    if (idUrl !== null) {
-      this.isEdit = true;
-      const id = Number(idUrl);
-
-      this.bookService.getBook(id).subscribe((book) => {
-        this.newBookName = book.name;
-        this.newBookDescription = book.description;
-        this.newUrlImage = book.url_image;
-        this.cdr.detectChanges();
-      });
-      return;
-    }
-
     const storeIdUrl = this.route.snapshot.queryParamMap.get('storeId');
     if (storeIdUrl !== null) {
       this.storeId = Number(storeIdUrl);
     }
-}
+    const idUrl = this.route.snapshot.paramMap.get('id');
+
+    if (idUrl !== null) {
+      this.isEdit = true;
+
+      const bookId = Number(idUrl);
+
+      this.bookService.getBook(bookId, this.storeId).subscribe((book) => {
+        this.newBookName = book.name;
+        this.newBookDescription = book.description;
+        console.log(this.newUrlImage);
+        console.log(book.urlImage);
+        this.newUrlImage = book.urlImage;
+        this.cdr.detectChanges();
+      });
+    }
+  }
   annuler() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/bookshelf'], {
+      queryParams: {
+          storeId: this.storeId
+        }
+    });
   }
   submit() {
-    if (this.newBookName.trim() === ''){
+    if (this.newBookName.trim() === '') {
       return;
     }
+
     const newBook = {
       name: this.newBookName,
       description: this.newBookDescription,
@@ -58,20 +65,21 @@ export class BookFormComponent {
     };
 
     const idUrl = this.route.snapshot.paramMap.get('id');
+
     if (idUrl === null) {
       this.bookService.createBook(newBook, this.storeId).subscribe((book) => {
-        this.router.navigate(['/bookshelf'],{
-          queryParams:{
-            storeId: this.storeId
-          }
+        this.router.navigate(['/bookshelf'], {
+          queryParams: {
+              storeId: this.storeId
+            }
         });
-    });}
-    else
-    {
-      const id = Number(idUrl);
-      this.bookService.updateBook(id, newBook).subscribe(() =>{
-        this.router.navigate(['/']);
       });
+    } else {
+        const id = Number(idUrl);
+        const storeId = Number(this.route.snapshot.queryParamMap.get('storeId'));
+        this.bookService.updateBook(id, newBook, storeId).subscribe(() => {
+          this.router.navigate(['/bookshelf'], { queryParams: {storeId: this.storeId}});
+        });
     }
-  }
+}
 }

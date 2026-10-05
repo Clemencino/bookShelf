@@ -1,9 +1,3 @@
-@if (authService.userName()) {
-  <p>Hello {{ authService.userName() }}</p>
-} @else {
-  <p>Not logged</p>
-}
-
 @if (ready()) {
   <router-outlet />
 }

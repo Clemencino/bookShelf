@@ -1,28 +1,36 @@
 <div class = "container">
     <div class="placeholder">
         <img class="userProfile" src="assets/user.png" (click)="logout()"/>
+        <div class="user-status">
+            @if (authService.userName()) {
+                <p>Hello {{ authService.userName() }}</p>
+            } @else {
+                <p>Not logged</p>
+            }
+        </div>
         <H1>Library</H1>
     </div>
 <div class="selection-store">
     <app-store-choose/>
 </div>
-
-    <div class="placeholder">
-        <div class="book-infos">
-            {{ bookshelf.length }} books collected
-        </div>
-        <div>
-            <div class = "books">
-                @for (item of bookshelf; track item.name){
-                    <app-book [book] =item/>
-                }
+    @if (route.snapshot.queryParams['storeId']) {
+        <div class="placeholder">
+            <div class="book-infos">
+                {{ bookshelf.length }} books collected
             </div>
-        </div>
-        @if (authService.userName() && route.snapshot.queryParams['storeId']) {
-            <div class="addButton">
-                <button class="add" routerLink="/addBook"
-                [queryParams]="{storeId:route.snapshot.queryParams['storeId'] }">+ Add Book</button>
+            <div>
+                <div class = "books">
+                    @for (item of bookshelf; track item.name){
+                        <app-book [book] =item/>
+                    }
+                </div>
             </div>
-        }
-    </div>
+            @if (authService.userName() && route.snapshot.queryParams['storeId']) {
+                <div class="addButton">
+                    <button class="add" routerLink="/addBook"
+                    [queryParams]="{storeId:route.snapshot.queryParams['storeId'] }">+ Add Book</button>
+                </div>
+            }
+        </div>
+    }
 </div>

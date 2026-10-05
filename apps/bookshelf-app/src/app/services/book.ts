@@ -20,10 +20,16 @@ export class BookService {
         );
     }
 
-    getBook(id: number){
-        return this.http.get<Book>(`http://localhost:3000/get_book/${id}`);
+    getBook(id: number, storeId: number){
+        const token = this.authService.getAccessToken();
+        return this.http.get<BookResponse>(`http://localhost:3000/get_book/${id}?storeId=${storeId}`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
     }
-
+   
     createBook(book: CreateBook, storeId: number){
         const token = this.authService.getAccessToken();
         return this.http.post<Book>('http://localhost:3000/create_book',{ ...book,storeId: storeId},
@@ -35,11 +41,19 @@ export class BookService {
         );
     }
 
-    deleteBook(id: number) {
-        return this.http.delete(`http://localhost:3000/delete_book/${id}`);
+    deleteBook(id: number, storeId: number) {
+        const token = this.authService.getAccessToken();
+        return this.http.delete(`http://localhost:3000/delete_book/${id}?storeId=${storeId}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }, 
+            
+        );
     }
 
-    updateBook(id: number, book: Omit<CreateBook, 'id' | 'storeId'>){
-        return this.http.put(`http://localhost:3000/update_book/${id}`,book);
+    updateBook(id: number, book: Omit<CreateBook, 'id'>, storeId: number){
+        return this.http.put(`http://localhost:3000/update_book/${id}?storeId=${storeId}`,book);
     }
 }
