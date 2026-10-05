@@ -54,6 +54,11 @@ export class BookService {
     }
 
     updateBook(id: number, book: Omit<CreateBook, 'id'>, storeId: number){
-        return this.http.put(`http://localhost:3000/update_book/${id}?storeId=${storeId}`,book);
+        const token = this.authService.getAccessToken();
+        return this.http.put(`http://localhost:3000/update_book/${id}?storeId=${storeId}`,book,{
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }, );
     }
 }

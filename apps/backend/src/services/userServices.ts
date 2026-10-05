@@ -10,7 +10,6 @@ export async function getUsers(): Promise<UserCreated[]> {
     return users;
 };
 
-
 export async function getUser(id: number): Promise<UserCreated | null>{
     const res = await pool.query('SELECT * FROM users where id=$1', [id]);
     if (res.rows.length === 0){
