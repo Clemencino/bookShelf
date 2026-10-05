@@ -1,6 +1,6 @@
 <div class = "container">
     <div class="placeholder">
-        <img class="userProfile" src="assets/user.png" [routerLink]="['/userLogin']"/>
+        <img class="userProfile" src="assets/user.png" (click)="logout()"/>
         <H1>Library</H1>
     </div>
 <div class="selection-store">
@@ -8,11 +8,9 @@
 </div>
 
     <div class="placeholder">
-        <!--
         <div class="book-infos">
             {{ bookshelf.length }} books collected
         </div>
-        -->
         <div>
             <div class = "books">
                 @for (item of bookshelf; track item.name){
@@ -20,10 +18,11 @@
                 }
             </div>
         </div>
-        <!--
-        <div class="addButton">
-            <button class="add" routerLink="/addBook">+ Add Book</button>
-        </div>
-        -->
+        @if (authService.userName() && route.snapshot.queryParams['storeId']) {
+            <div class="addButton">
+                <button class="add" routerLink="/addBook"
+                [queryParams]="{storeId:route.snapshot.queryParams['storeId'] }">+ Add Book</button>
+            </div>
+        }
     </div>
 </div>

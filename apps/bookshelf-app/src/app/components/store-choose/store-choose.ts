@@ -17,21 +17,18 @@ export class StoreChoose {
   constructor(private storeService: StoreService, private cdr: ChangeDetectorRef, private router: Router) {}
 
   getStoreID(event: Event) {
-  const storeId = (event.target as HTMLSelectElement).value;
+    const storeId = (event.target as HTMLSelectElement).value;
+    if (!storeId){
+      return;
+    }
 
-  if (!storeId) {
-    return;
-  }
-
-  if (storeId === "create-store") {
-    this.router.navigate(['/storeForm']);
-    return;
-  }
-  console.log("store ID :", storeId);
-  
+    if (storeId === 'create-store') {
+      this.router.navigate(['/storeForm']);
+      return;
+    }
+    console.log('Store selected:', storeId);
+    this.router.navigate(['/bookshelf'],{queryParams: {storeId: Number(storeId)}});
 }
-
-
   ngOnInit() {
     this.storeService.getStores().subscribe((storesResponse) =>{
       this.stores = storesResponse;

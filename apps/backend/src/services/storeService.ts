@@ -1,8 +1,9 @@
 import { Store, StoreToCreate} from '@org/storelib'
 import { pool } from '../db/postgres';
 
-export async function getStores(): Promise<Store[]> {
-    const request = await pool.query('SELECT * from stores');
+export async function getStores(userId: number): Promise<Store[]> {
+    const request = await pool.query(`SELECT stores.* FROM stores JOIN user_store ON stores.id = user_store.store_id 
+        WHERE user_store.user_id = $1`, [userId]);
     const stores = [];
     for (const store of request.rows) {
         stores.push(store);
@@ -27,11 +28,14 @@ export async function deleteStore(id: number): Promise<boolean> {
     return false;
 }
 
-export async function addStore(toadd: Omit<Store,'id'>): Promise<Store>{
+export async function addStore(toadd: Omit<Store,'id'>, userId: number): Promise<Store>{
     const res = await pool.query(`INSERT INTO stores (name, description) 
         VALUES ($1, $2) RETURNING *`,[toadd.name, toadd.description]);
-        console.log(res.rows[0]);
-    return res.rows[0];
+    const newStore = res.rows[0];
+
+    await pool.query(`INSERT INTO user_store (user_id, store_id) VALUES ($1, $2)`, [userId, newStore.id]);
+
+    return newStore;
 }
 
 export async function updateStore(id: number,newName: string, newDescription: string):Promise<Store| null> {
@@ -43,4 +47,8 @@ export async function updateStore(id: number,newName: string, newDescription: st
     }
 
     return res.rows[0];
+}
+
+export async function addStoreUser(userId: number, storeId: number): Promise<void> {
+    await pool.query(`INSERT INTO user_store (user_id, store_id) VALUES ($1, $2)`, [userId, storeId]);
 }

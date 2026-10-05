@@ -23,20 +23,25 @@ export class BookFormComponent {
   newUrlImage = '';
   cdr = inject(ChangeDetectorRef);
   isEdit = false;
-
+  storeId = 0;
   ngOnInit() {
     const idUrl = this.route.snapshot.paramMap.get('id');
     if (idUrl !== null) {
-      this.isEdit=true;
+      this.isEdit = true;
       const id = Number(idUrl);
 
       this.bookService.getBook(id).subscribe((book) => {
         this.newBookName = book.name;
         this.newBookDescription = book.description;
         this.newUrlImage = book.url_image;
-
         this.cdr.detectChanges();
       });
+      return;
+    }
+
+    const storeIdUrl = this.route.snapshot.queryParamMap.get('storeId');
+    if (storeIdUrl !== null) {
+      this.storeId = Number(storeIdUrl);
     }
 }
   annuler() {
@@ -54,16 +59,17 @@ export class BookFormComponent {
 
     const idUrl = this.route.snapshot.paramMap.get('id');
     if (idUrl === null) {
-      this.bookService.createBook(newBook).subscribe((book) => {
-        console.log('book created');
-        this.router.navigate(['/']);
-      });
-    }
+      this.bookService.createBook(newBook, this.storeId).subscribe((book) => {
+        this.router.navigate(['/bookshelf'],{
+          queryParams:{
+            storeId: this.storeId
+          }
+        });
+    });}
     else
     {
       const id = Number(idUrl);
       this.bookService.updateBook(id, newBook).subscribe(() =>{
-        console.log('book updated');
         this.router.navigate(['/']);
       });
     }

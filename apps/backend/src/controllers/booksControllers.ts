@@ -6,7 +6,9 @@ import request from 'supertest'
 const app: Express = express();
 
 export async function getAllBooks(req: Request, res: Response):Promise<Response<BookResponse[]>>{
-    const books = await bookService.getAllBooks();
+    const userId = res.locals['userId'];
+    const storeId = Number(req.query['storeId']);
+    const books = await bookService.getBooksUser(userId, storeId);
     return res.json(books);
 }
 
@@ -26,10 +28,12 @@ export async function deleteBook(req: Request, res: Response): Promise<Response<
 }
 
 export async function addBook(req: Request, res: Response): Promise<Response<BookResponse>> {
-    console.log(req.body);
-    const newBook = await bookService.addBook(req.body, req.body.userId);
+    const userId = res.locals['userId'];
+    const storeId = Number(req.body.storeId);
 
-    return res.status(201).json(newBook);
+    const book = await bookService.addBook(req.body,userId,storeId);
+
+    return res.status(201).json(book);
 }
 
 export async function updateBook(req: Request, res: Response) :Promise<Response<BookResponse>>{

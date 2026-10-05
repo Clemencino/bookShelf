@@ -5,7 +5,8 @@ import { Store }from '@org/storelib'
 const app: Express = express();
 
 export async function getAllStores(req: Request, res: Response):Promise<Response<Store[]>>{
-    const stores = await storeService.getStores();
+    const userId = res.locals['userId'];
+    const stores = await storeService.getStores(userId);
     return res.json(stores);
 }
 
@@ -25,8 +26,8 @@ export async function deleteStore(req: Request, res: Response): Promise<Response
 }
 
 export async function addStore(req: Request, res: Response): Promise<Response<Store>> {
-    console.log(req.body);
-    const newStore = await storeService.addStore(req.body);
+    const userId = res.locals['userId'];
+    const newStore = await storeService.addStore(req.body,userId);
 
     return res.status(201).json(newStore);
 }
@@ -38,4 +39,11 @@ export async function updateStore(req: Request, res: Response) :Promise<Response
         return res.status(404).json({ message: "Store not found" });
     }
     return res.json(newStore);
+}
+
+export async function addStoreUser(req: Request,res: Response): Promise<Response> {
+    const userId = res.locals['userId'];
+    const storeId = Number(req.body.storeId);
+    await storeService.addStoreUser(userId, storeId);
+    return res.status(201).json();
 }
